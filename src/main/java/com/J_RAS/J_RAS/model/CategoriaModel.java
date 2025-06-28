@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name ="categorias")
 @ToString(exclude = "productos")
+
 public class CategoriaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

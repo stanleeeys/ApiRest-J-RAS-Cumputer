@@ -1,7 +1,7 @@
 package com.J_RAS.J_RAS.controller;
 
 import com.J_RAS.J_RAS.model.UsuariosModel;
-import com.J_RAS.J_RAS.service.IUsuariosService;
+import com.J_RAS.J_RAS.service.UsuariosService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class UsuarioController {
     private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 
     @Autowired
-    private IUsuariosService usuariosService;
+    private UsuariosService usuariosService;
 
     @GetMapping
     public List<UsuariosModel> obtenerUsuarios(){

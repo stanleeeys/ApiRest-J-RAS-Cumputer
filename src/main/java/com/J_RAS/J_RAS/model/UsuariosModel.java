@@ -22,7 +22,7 @@ public class UsuariosModel {
     private String contrasena;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id")
-    private RolModel rolModel;
+    private RolModel rol;
 }

@@ -1,5 +1,7 @@
 package com.J_RAS.J_RAS.service;
 
+import com.J_RAS.J_RAS.model.RolModel;
+import com.J_RAS.J_RAS.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.J_RAS.J_RAS.model.UsuariosModel;
 import com.J_RAS.J_RAS.repository.UsuarioRepository;
@@ -9,36 +11,40 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsuariosService implements IUsuariosService {
+public class UsuariosService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private RolRepository rolRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Override
+
     public List<UsuariosModel> ListarUsuario() {
         return this.usuarioRepository.findAll();
     }
 
-    @Override
+
     public UsuariosModel buscarUsuario(Long id) {
         return usuarioRepository.findById(id).orElse(null);
 
     }
 
-    @Override
+
     public void eliminarUsuarioPorId(Long id) {
-       usuarioRepository.deleteById(id);
+        usuarioRepository.deleteById(id);
     }
 
-    @Override
+
     public UsuariosModel guardarUsuario(UsuariosModel usuario) {
-        // Encriptar la contraseña antes de guardar
+        RolModel rolPorDefecto = rolRepository.findByNombre("CLIENTE");
+        usuario.setRol(rolPorDefecto);
+
         String passEncriptada = passwordEncoder.encode(usuario.getContrasena());
         usuario.setContrasena(passEncriptada);
 
-        // Guardar usuario en BD
         return usuarioRepository.save(usuario);
     }
 }

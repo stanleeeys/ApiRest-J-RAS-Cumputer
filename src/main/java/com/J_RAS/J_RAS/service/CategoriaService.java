@@ -8,31 +8,36 @@ import org.springframework.stereotype.*;
 import java.util.List;
 
 @Service
-public class CategoriaService  implements  ICategoriaService{
+public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Override
+
     public List<CategoriaModel>listarCategoria(){
         return this.categoriaRepository.findAll();
 
     }
-    @Override
+
     public CategoriaModel buscarCategoriaPorId(Long idCategoria){
         CategoriaModel categoriaModel = this.categoriaRepository.findById(idCategoria).orElse(null);
         return categoriaModel;
     }
-    @Override
+
     public CategoriaModel guardarCategoria(CategoriaModel categoriaModel) {
         return categoriaRepository.save(categoriaModel);
 
     }
-    @Override
-    public void eliminarCategoriaPorId(Long idCategoria){
-        this.categoriaRepository.deleteById(idCategoria);
+
+    public boolean eliminarCategoriaPorId(Long id) {
+        try {
+            categoriaRepository.deleteById(id);
+            return true;
+        }catch (Exception err){
+            return false;
+        }
     }
-    @Override
+
     public CategoriaModel actualizarCategoria(Long idCategoria, CategoriaModel categoriaActualizados){
         CategoriaModel categoriaExistente = categoriaRepository.findById(idCategoria)
                 .orElseThrow(()-> new RuntimeException("Catgeoria no encontrado con ID: " + idCategoria ));
