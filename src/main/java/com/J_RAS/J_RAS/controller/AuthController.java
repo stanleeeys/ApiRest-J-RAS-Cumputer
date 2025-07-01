@@ -49,8 +49,7 @@ public class AuthController {
         // 4. Devolver el token y datos del usuario
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);
-        response.put("usuario", usuario.getNombre());
-        response.put("rol", usuario.getRol());
+
 
         return ResponseEntity.ok(response);
     }

@@ -5,6 +5,7 @@ import com.J_RAS.J_RAS.service.UsuariosService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,23 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioGuardado);
 
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuariosModel> obtenerUsuarioPorId(@PathVariable Long id){
+        UsuariosModel usuario = usuariosService.obtenerUsuarioPorId(id);
+        if (usuario != null) {
+            return new ResponseEntity<>(usuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @DeleteMapping(path = "/{id}")
+        public String eliminarProductoPorId(@PathVariable("id")Long id){
+            boolean ok = this.usuariosService.eliminarUsuarioPorId(id);
+            if (ok){
+                return "Se elimino el usuario con id " + id;
+            }else {
+                return "no se pudo eliminar el usuario con id" + id;
+            }
+        }
+
 }

@@ -27,14 +27,19 @@ public class UsuariosService {
     }
 
 
-    public UsuariosModel buscarUsuario(Long id) {
+    public UsuariosModel obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
 
     }
 
 
-    public void eliminarUsuarioPorId(Long id) {
-        usuarioRepository.deleteById(id);
+    public boolean eliminarUsuarioPorId(Long id) {
+        try {
+            usuarioRepository.deleteById(id);
+            return true;
+        }catch (Exception err){
+            return false;
+        }
     }
 
 

@@ -37,7 +37,7 @@ public class ProductoController {
         return productosModel;
     }
     @PutMapping("/{id}")
-    public ResponseEntity<ProductosModel> actualizarProducto(@PathVariable Long id, @RequestBody ProductosModel nuevoProducto){
+    public ResponseEntity<ProductosModel> actualizarProductoPorId(@PathVariable Long id, @RequestBody ProductosModel nuevoProducto){
         try{
             ProductosModel actualizarProductos = productoService.actualizarProductos(id, nuevoProducto);
             if (actualizarProductos != null){
@@ -54,7 +54,7 @@ public class ProductoController {
         if (ok){
             return "Se elimino el producto con id " + id;
         }else {
-            return "no se pudo eliminar el usuario con id" + id;
+            return "no se pudo eliminar el producto con id" + id;
         }
     }
 }
