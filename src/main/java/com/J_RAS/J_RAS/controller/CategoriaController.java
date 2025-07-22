@@ -2,9 +2,12 @@ package com.J_RAS.J_RAS.controller;
 
 
 import com.J_RAS.J_RAS.model.CategoriaModel;
+import com.J_RAS.J_RAS.model.ProductosModel;
 import com.J_RAS.J_RAS.service.CategoriaService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,19 +28,8 @@ public class CategoriaController {
         categorias.forEach(categoria -> logger.info(categoria.toString()));
         return categorias;
     }
-    @GetMapping
-    public CategoriaModel obtenerCategoriaPorId(Long idCategoria) {
-        CategoriaModel categoria = this.categoriaService.buscarCategoriaPorId(idCategoria);
-        if (categoria != null) {
-            logger.info("Categoria obtenida: " + categoria);
-            return categoria;
-        } else {
-            logger.warn("Categoria no encontrada con ID: " + idCategoria);
-            return null;
-        }
-    }
     @PostMapping
-    public CategoriaModel agregarCategoria(CategoriaModel categoriaModel) {
+    public CategoriaModel agregarCategoria(@RequestBody CategoriaModel categoriaModel) {
         logger.info("Categoria a agregar: " + categoriaModel);
         CategoriaModel categoriaGuardada = this.categoriaService.guardarCategoria(categoriaModel);
         logger.info("Categoria guardada: " + categoriaGuardada);
@@ -50,6 +42,18 @@ public class CategoriaController {
             return "Se eliminó la categoría con ID " + id;
         } else {
             return "No se pudo eliminar la categoría con ID " + id;
+        }
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaModel> actualizarCategoriaPorId(@PathVariable Long id, @RequestBody CategoriaModel nuevoCategoria){
+        try{
+            CategoriaModel actualizarCategoria = categoriaService.actualizarCategoria(id, nuevoCategoria);
+            if (actualizarCategoria != null){
+                return new ResponseEntity<>(actualizarCategoria, HttpStatus.OK);
+            }
+            return ResponseEntity.notFound().build();
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

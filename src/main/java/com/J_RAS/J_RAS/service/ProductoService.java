@@ -25,7 +25,9 @@ public class ProductoService {
     }
 
     public ProductosModel guardarProducto(ProductosModel productosModel) {
-
+        if (productosModel == null) {
+            throw new IllegalArgumentException("El producto no puede ser nulo");
+        }
         return productoRepository.save(productosModel);
 
     }
