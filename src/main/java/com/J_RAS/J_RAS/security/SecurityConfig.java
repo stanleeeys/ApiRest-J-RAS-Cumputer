@@ -24,6 +24,7 @@ public class SecurityConfig {
                                         "/api/productos",
                                         "/api/categorias/**",
                                         "/api/productos/**",
+                                        "/api/carrito/**",
                                         "/api/usuarios**").permitAll() // URLs públicas
 //                              .requestMatchers("/api/usuarios").hasRole("ADMIN")
                                 .anyRequest().authenticated() // Las demás requieren autenticación
