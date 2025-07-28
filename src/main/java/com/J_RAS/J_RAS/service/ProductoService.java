@@ -65,4 +65,7 @@ public class ProductoService {
             throw new RuntimeException("Error al actualizar el producto: " + e.getMessage(), e);
         }
     }
+    public List<ProductosModel> obtenerProductosPorCategoria(Long categoriaId) {
+        return productoRepository.findByCategorias_id(categoriaId);
+    }
 }

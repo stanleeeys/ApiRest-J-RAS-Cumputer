@@ -1,9 +1,11 @@
 package com.J_RAS.J_RAS.controller;
 
 
+import com.J_RAS.J_RAS.dto.ProductoDTO;
 import com.J_RAS.J_RAS.model.CategoriaModel;
 import com.J_RAS.J_RAS.model.ProductosModel;
 import com.J_RAS.J_RAS.service.CategoriaService;
+import com.J_RAS.J_RAS.service.ProductoService;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaController {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoriaController.class);
@@ -56,5 +59,7 @@ public class CategoriaController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
 }

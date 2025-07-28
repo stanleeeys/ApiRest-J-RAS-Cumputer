@@ -25,7 +25,12 @@ public class SecurityConfig {
                                         "/api/categorias/**",
                                         "/api/productos/**",
                                         "/api/carrito/**",
-                                        "/api/usuarios/**").permitAll() // URLs públicas
+                                        "/api/usuarios/**",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui/**",
+                                        "/swagger-ui.html",
+                                        "/swagger-resources/**",
+                                        "/webjars/**").permitAll() // URLs públicas
 //                              .requestMatchers("/api/usuarios").hasRole("ADMIN")
                                 .anyRequest().authenticated() // Las demás requieren autenticación
                 )

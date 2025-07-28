@@ -39,7 +39,7 @@ public class AuthController {
         UsuariosModel usuario = optionalUsuario.get();
 
         // 2. Verificar la contraseña
-        if (!passwordEncoder.matches(request.getContrasena(), usuario.getContrasena())) {
+        if (!passwordEncoder.matches(request.getPassword(), usuario.getContrasena())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
         }
 

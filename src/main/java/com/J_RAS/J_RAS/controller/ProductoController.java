@@ -22,6 +22,7 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
+
     @GetMapping
     public List<ProductosModel> listarProductos(){
         List<ProductosModel> productos = this.productoService.listarProductos();
@@ -56,5 +57,10 @@ public class ProductoController {
         }else {
             return "no se pudo eliminar el producto con id" + id;
         }
+    }
+    @GetMapping("/categoria/{id}")
+    public ResponseEntity<List<ProductosModel>> obtenerPorCategoria(@PathVariable Long id) {
+        List<ProductosModel> productos = productoService.obtenerProductosPorCategoria(id);
+        return ResponseEntity.ok(productos);
     }
 }
