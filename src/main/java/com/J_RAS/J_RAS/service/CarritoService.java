@@ -1,12 +1,9 @@
 package com.J_RAS.J_RAS.service;
 
-import com.J_RAS.J_RAS.dto.CarritoRequestDTO;
 import com.J_RAS.J_RAS.model.CarritoModel;
 import com.J_RAS.J_RAS.model.ProductosModel;
-import com.J_RAS.J_RAS.model.UsuariosModel;
+import com.J_RAS.J_RAS.model.Usuarios;
 import com.J_RAS.J_RAS.repository.CarritoRepository;
-import com.J_RAS.J_RAS.repository.ProductoRepository;
-import com.J_RAS.J_RAS.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,7 @@ public class CarritoService {
     @Autowired
     private CarritoRepository carritoRepository;
 
-    public CarritoModel agregarAlCarrito(UsuariosModel usuario, ProductosModel producto, Integer cantidad) {
+    public CarritoModel agregarAlCarrito(Usuarios usuario, ProductosModel producto, Integer cantidad) {
         CarritoModel item = new CarritoModel();
         item.setUsuario(usuario);
         item.setProducto(producto);
@@ -29,7 +26,7 @@ public class CarritoService {
         return carritoRepository.save(item);
     }
 
-    public List<CarritoModel> obtenerCarritoUsuario(UsuariosModel usuario) {
+    public List<CarritoModel> obtenerCarritoUsuario(Usuarios usuario) {
         return carritoRepository.findByUsuario(usuario);
     }
 
@@ -37,7 +34,7 @@ public class CarritoService {
         carritoRepository.deleteById(id);
     }
 
-    public void vaciarCarrito(UsuariosModel usuario) {
+    public void vaciarCarrito(Usuarios usuario) {
         List<CarritoModel> items = carritoRepository.findByUsuario(usuario);
         carritoRepository.deleteAll(items);
     }

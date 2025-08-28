@@ -3,8 +3,9 @@ package com.J_RAS.J_RAS.service;
 import com.J_RAS.J_RAS.model.RolModel;
 import com.J_RAS.J_RAS.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.J_RAS.J_RAS.model.UsuariosModel;
+import com.J_RAS.J_RAS.model.Usuarios;
 import com.J_RAS.J_RAS.repository.UsuarioRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,12 @@ public class UsuariosService {
     private PasswordEncoder passwordEncoder;
 
 
-    public List<UsuariosModel> ListarUsuario() {
+    public List<Usuarios> ListarUsuario() {
         return this.usuarioRepository.findAll();
     }
 
 
-    public UsuariosModel obtenerUsuarioPorId(Long id) {
+    public Usuarios obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
 
     }
@@ -43,7 +44,7 @@ public class UsuariosService {
     }
 
 
-    public UsuariosModel guardarUsuario(UsuariosModel usuario) {
+    public Usuarios guardarUsuario(Usuarios usuario) {
         RolModel rolPorDefecto = rolRepository.findByNombre("CLIENTE");
         usuario.setRol(rolPorDefecto);
 

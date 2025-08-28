@@ -2,8 +2,11 @@ package com.J_RAS.J_RAS.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name ="roles")
 public class RolModel {

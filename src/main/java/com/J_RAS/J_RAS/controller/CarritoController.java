@@ -4,15 +4,12 @@ import com.J_RAS.J_RAS.dto.CarritoRequest;
 import com.J_RAS.J_RAS.dto.CarritoRequestDTO;
 import com.J_RAS.J_RAS.model.CarritoModel;
 import com.J_RAS.J_RAS.model.ProductosModel;
-import com.J_RAS.J_RAS.model.UsuariosModel;
+import com.J_RAS.J_RAS.model.Usuarios;
 import com.J_RAS.J_RAS.repository.ProductoRepository;
 import com.J_RAS.J_RAS.repository.UsuarioRepository;
 import com.J_RAS.J_RAS.service.CarritoService;
 import com.J_RAS.J_RAS.service.DTOMapper;
-import com.J_RAS.J_RAS.service.ProductoService;
-import com.J_RAS.J_RAS.service.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public class CarritoController {
         System.out.println("usuarioId: " + request.getUsuarioId()); // para comprobar
         System.out.println("productoId: " + request.getProductoId());
 
-        UsuariosModel usuario = usuarioRepository.findById(request.getUsuarioId())
+        Usuarios usuario = usuarioRepository.findById(request.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         ProductosModel producto = productosRepository.findById(request.getProductoId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
@@ -49,7 +46,7 @@ public class CarritoController {
 
     @GetMapping("/{usuarioId}")
     public List<CarritoRequestDTO> obtenerCarrito(@PathVariable Long usuarioId) {
-        UsuariosModel usuario = usuarioRepository.findById(usuarioId)
+        Usuarios usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         List<CarritoModel> carritoItems = carritoService.obtenerCarritoUsuario(usuario);
 
@@ -66,7 +63,7 @@ public class CarritoController {
 
     @DeleteMapping("/vaciar/{usuarioId}")
     public void vaciarCarrito(@PathVariable Long usuarioId) {
-        UsuariosModel usuario = usuarioRepository.findById(usuarioId)
+        Usuarios usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         carritoService.vaciarCarrito(usuario);
     }

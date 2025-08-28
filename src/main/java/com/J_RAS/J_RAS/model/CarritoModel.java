@@ -21,7 +21,7 @@ public class CarritoModel {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    private UsuariosModel usuario;
+    private Usuarios usuario;
 
     @ManyToOne
     @JoinColumn(name = "producto_id", nullable = false)

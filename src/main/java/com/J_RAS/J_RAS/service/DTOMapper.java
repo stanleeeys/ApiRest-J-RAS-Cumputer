@@ -5,10 +5,10 @@ import com.J_RAS.J_RAS.dto.ProductoDTO;
 import com.J_RAS.J_RAS.dto.UsuarioDTO;
 import com.J_RAS.J_RAS.model.CarritoModel;
 import com.J_RAS.J_RAS.model.ProductosModel;
-import com.J_RAS.J_RAS.model.UsuariosModel;
+import com.J_RAS.J_RAS.model.Usuarios;
 
 public class DTOMapper {
-    public static UsuarioDTO toUsuarioDTO(UsuariosModel usuario) {
+    public static UsuarioDTO toUsuarioDTO(Usuarios usuario) {
         if (usuario == null) return null;
 
         UsuarioDTO dto = new UsuarioDTO();

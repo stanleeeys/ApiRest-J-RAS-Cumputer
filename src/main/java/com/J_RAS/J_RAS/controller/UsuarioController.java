@@ -1,6 +1,6 @@
 package com.J_RAS.J_RAS.controller;
 
-import com.J_RAS.J_RAS.model.UsuariosModel;
+import com.J_RAS.J_RAS.model.Usuarios;
 import com.J_RAS.J_RAS.service.UsuariosService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,22 +22,22 @@ public class UsuarioController {
     private UsuariosService usuariosService;
 
     @GetMapping
-    public List<UsuariosModel> obtenerUsuarios(){
-        List<UsuariosModel> usuarios = this.usuariosService.ListarUsuario();
+    public List<Usuarios> obtenerUsuarios(){
+        List<Usuarios> usuarios = this.usuariosService.ListarUsuario();
         logger.info("Usuario obtenido");
         usuarios.forEach(usuario -> logger.info(usuario.toString()));
         return usuarios;
     }
     @PostMapping
-    public ResponseEntity<UsuariosModel> agregarUsuarios(@RequestBody UsuariosModel usuariosModel) {
-        logger.info("Usuarios a agregar: {}", usuariosModel);
-        UsuariosModel usuarioGuardado = this.usuariosService.guardarUsuario(usuariosModel);
+    public ResponseEntity<Usuarios> agregarUsuarios(@RequestBody Usuarios usuarios) {
+        logger.info("Usuarios a agregar: {}", usuarios);
+        Usuarios usuarioGuardado = this.usuariosService.guardarUsuario(usuarios);
         return ResponseEntity.ok(usuarioGuardado);
 
     }
     @GetMapping("/{id}")
-    public ResponseEntity<UsuariosModel> obtenerUsuarioPorId(@PathVariable Long id){
-        UsuariosModel usuario = usuariosService.obtenerUsuarioPorId(id);
+    public ResponseEntity<Usuarios> obtenerUsuarioPorId(@PathVariable Long id){
+        Usuarios usuario = usuariosService.obtenerUsuarioPorId(id);
         if (usuario != null) {
             return new ResponseEntity<>(usuario, HttpStatus.OK);
         } else {
